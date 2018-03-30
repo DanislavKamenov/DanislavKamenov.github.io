@@ -1,124 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>SoftUni Blog</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <script src="scripts/jquery-1.10.2.js"></script>
-    <script src="scripts/bootstrap.js"></script>
+    <title>Prodavachnik</title>
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/attachEvents.js"></script>
+    <script src="scripts/displayElements.js"></script>
+    <script src="scripts/webApi.js"></script>
+    <script src="scripts/advertController.js"></script>
+    <script src="scripts/prodavachnik.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/prodavachnik.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <div class="navbar navbar-default navbar-fixed-top text-uppercase">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand"> SoftUni Blog</a>
+<header id="menu" class="menu">
+    <a href="#" id="linkHome" class="menu-item" >Home</a>
+    <a href="#" id="linkLogin" class="menu-item">Login</a>
+    <a href="#" id="linkRegister" class="menu-item">Register</a>
+    <a href="#" id="linkListAds" class="menu-item">List Advertisements</a>
+    <a href="#" id="linkCreateAd" class="menu-item">Create Advertisement</a>
+    <a href="#" id="linkLogout" class="menu-item">Logout</a>
+    <span id="loggedInUser" class="menu-item"></span>
+    <div></div>
+</header>
 
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="register.html">Register</a> </li>
-                        <li><a href="login.html">Login</a> </li>
-                    </ul>
-                </div>
-            </div>
+<main>
+    <section id="loadingBox" class="loadingBox">Loading ...</section>
+
+    <section id="infoBox" class="infoBox">Info</section>
+
+    <section id="errorBox" class="errorBox">Error</section>
+
+    <section id="viewHome" class="viewHome">
+        <h1 class="title">Welcome</h1>
+        <p class="body-text">Welcome to our advertisement site.</p>
+    </section>
+
+    <section id="viewLogin" class="viewLogin">
+        <h1 class="titleForm">Please login</h1>
+        <form id="formLogin" class="form">
+            <div>Username:</div>
+            <div><input type="text" name="username" required /></div>
+            <div>Password:</div>
+            <div><input type="password" name="passwd" required /></div>
+            <div><input type="button" id="buttonLoginUser" value="Login" /></div>
+        </form>
+    </section>
+
+    <section id="viewRegister" class="viewRegister">
+        <h1 class="titleForm">Please register here</h1>
+        <form id="formRegister" class="form">
+            <div>Username:</div>
+            <div><input type="text" name="username" required /></div>
+            <div>Password:</div>
+            <div><input type="password" name="passwd" required /></div>
+            <div><input type="button" id="buttonRegisterUser" value="Register" /></div>
+        </form>
+    </section>
+
+    <section id="viewAds" class="viewAds">
+        <h1 class="titleForm">Advertisements</h1>
+        <div id="ads" class="ads">
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Publisher</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Date Published</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Ad title</td>
+                    <td>Ad author</td>
+                    <td>Ad description</td>
+                    <td>Price</td>
+                    <td>Date published</td>
+                    <td>
+                        <a href="#">[Delete]</a>
+                        <a href="#">[Edit]</a>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </header>
-    <main>
-        <div class="container body-content">
-            <div class="row">
-                <div class="col-md-6">
-                    <article>
-                        <header>
-                            <h2>Why Choosing the Right Storage Infrastructure.</h2>
-                        </header>
+    </section>
 
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Proin ullamcorper a nunc posuere luctus. Aliquam sapien purus,
-                            rutrum non tempor et, aliquam volutpat augue. Praesent lobortis
-                            libero vel orci viverra rhoncus. Quisque ut sollicitudin ipsum.
-                            Donec eu risus dignissim, fringilla ipsum at, aliquet risus. Fusce a convallis dui,
-                            in elementum velit. Phasellus eget odio felis. Duis et urna elementum,
-                            tempor enim pellentesque, condimentum nisl.
-                            Praesent viverra luctus odio eget scelerisque.
-                            Morbi felis nulla, vestibulum vitae aliquet vitae, pellentesque at erat.
-                            Proin hendrerit convallis erat sed imperdiet. Morbi justo leo, blandit vitae interdum sed,
-                            accumsan nec libero.
-                            Duis varius blandit eros et aliquet. Cras eget felis porta, condimentum mauris sit amet,
-                            hendrerit dolor. Integer ultrices sem lobortis lacinia sollicitudin.
-                            Aliquam maximus convallis diam, sodales rhoncus est suscipit eget. Praesent id ex sit
-                            amet leo vestibulum feugiat. Quisque nisi libero, pellentesque vel placerat eget,
-                            eleifend id lacus. Mauris augue nunc, aliquam mollis arcu vitae, pellentesque porta elit.
-                            Mauris elementum, quam vel iaculis rutrum, risus nulla facilisis mi,
-                            vitae aliquet mi purus id ante. Interdum et malesuada fames ac ante ipsum primis
-                            in faucibus. Morbi gravida interdum mauris, sit amet porta lectus commodo sed.
-                            Mauris placerat volutpat dui, ac rhoncus ante venenatis ac.
-                        </p>
+    <section id="viewCreateAd" class="viewCreateAd">
+        <h1 class="titleForm">Create new Advertisement</h1>
+        <form id="formCreateAd" class="form">
+            <div>Title:</div>
+            <div><input type="text" name="title" required /></div>
+            <div>Description:</div>
+            <div><textarea name="description" rows="10" required></textarea></div>
+            <div>Date Published:</div>
+            <div><input type="date" name="datePublished" required /></div>
+            <div>Price:</div>
+            <div><input type="number" step="0.01" name="price" required /></div>
+            <div><input type="button" id="buttonCreateAd" value="Create" /></div>
+        </form>
+    </section>
 
-                        <small class="author">
-                            Danislav Kamenov
-                        </small>
-
-                        <footer>
-                            <div class="pull-right">
-                                <a class="btn btn-default btn-xs" href="viewpost.html">Read more &raquo;</a>
-                            </div>
-                        </footer>
-                    </article>
-                </div>
-                <div class="col-md-6">
-                    <article>
-                        <header>
-                            <h2>Why Choosing the Right Storage Infrastructure.</h2>
-                        </header>
-
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Proin ullamcorper a nunc posuere luctus. Aliquam sapien purus,
-                            rutrum non tempor et, aliquam volutpat augue. Praesent lobortis
-                            libero vel orci viverra rhoncus. Quisque ut sollicitudin ipsum.
-                            Donec eu risus dignissim, fringilla ipsum at, aliquet risus. Fusce a convallis dui,
-                            in elementum velit. Phasellus eget odio felis. Duis et urna elementum,
-                            tempor enim pellentesque, condimentum nisl.
-                            Praesent viverra luctus odio eget scelerisque.
-                            Morbi felis nulla, vestibulum vitae aliquet vitae, pellentesque at erat.
-                            Proin hendrerit convallis erat sed imperdiet. Morbi justo leo, blandit vitae interdum sed,
-                            accumsan nec libero.
-                            Duis varius blandit eros et aliquet. Cras eget felis porta, condimentum mauris sit amet,
-                            hendrerit dolor. Integer ultrices sem lobortis lacinia sollicitudin.
-                            Aliquam maximus convallis diam, sodales rhoncus est suscipit eget. Praesent id ex sit
-                            amet leo vestibulum feugiat. Quisque nisi libero, pellentesque vel placerat eget,
-                            eleifend id lacus. Mauris augue nunc, aliquam mollis arcu vitae, pellentesque porta elit.
-                            Mauris elementum, quam vel iaculis rutrum, risus nulla facilisis mi,
-                            vitae aliquet mi purus id ante. Interdum et malesuada fames ac ante ipsum primis
-                            in faucibus. Morbi gravida interdum mauris, sit amet porta lectus commodo sed.
-                            Mauris placerat volutpat dui, ac rhoncus ante venenatis ac.
-                        </p>
-
-                        <small class="author">
-                            Danislav Kamenov
-                        </small>
-
-                        <footer>
-                            <div class="pull-right">
-                                <a class="btn btn-default btn-xs" href="viewpost.html">Read more &raquo;</a>
-                            </div>
-                        </footer>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <div class="container modal-footer">
-            <p>&copy; 2017 - Software University Foundation</p>
-        </div>
-    </footer>
+    <section id="viewEditAd" class="viewEditAd">
+        <h1 class="titleForm">Edit existing advertisement</h1>
+        <form id="formEditAd" class="form">
+            <div><input type="hidden" name="id" required /></div>
+            <div><input type="hidden" name="publisher" required /></div>
+            <div>Title:</div>
+            <div><input type="text" name="title" required /></div>
+            <div>Description:</div>
+            <div><textarea name="description" rows="10" required></textarea></div>
+            <div>Date Published:</div>
+            <div><input type="date" name="datePublished" required /></div>
+            <div>Price:</div>
+            <div><input type="number" step="0.01" name="price" required /></div>
+            <div><input type="button" id="buttonEditAd" value="Edit" /></div>
+        </form>
+    </section>
+    <script>
+        startApp();
+    </script>
+</main>
+<footer>Prodavachnik - Simple SPA Application</footer>
 </body>
 </html>
