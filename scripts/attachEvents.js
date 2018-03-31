@@ -4,14 +4,14 @@ function attachEvents() {
     $('#linkLogin').on('click', showFormView);
     $('#linkRegister').on('click', showFormView);
     $('#linkLogout').on('click', webApi.logOutUser);
-    $('#linkCreateAd').on('click', showCreateAdView);
+    $('#linkCreateAd').on('click', showFormView);
     $('#linkListAds').on('click', listAds);
 
     //bind forms
     $('#buttonRegisterUser').on('click', webApi.registerUser);
     $('#buttonLoginUser').on('click', webApi.loginUser);
     $('#buttonCreateAd').on('click', createAd);
-    $('#buttonEditAd').on('click', editBook);
+    $('#buttonEditAd').on('click', editAd);
 
 
     // $("#infoBox, #errorBox").on('click', function() {

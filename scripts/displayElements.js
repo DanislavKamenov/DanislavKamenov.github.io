@@ -39,18 +39,31 @@ function showHomeView() {
 }
 
 function showFormView(e) {
-    let formName = $(e.target).text();
+    let formName = $(e.target).attr('id').slice(4);
+    console.log(formName);
     $('#form'+ formName).trigger('reset');
     showView('#view' + formName);
 }
 
-function showCreateAdView() {
-    $('#formCreateAd').trigger('reset');
-    showView('#viewCreateAd');
+function showAdDetails(e) {
+    let ad = e.data.ad;
+    let adInfo = $('<div>').append(
+        $('<img src="" height="200" width="300">').attr('src', ad.image),
+        $('<br>'),
+        $('<label>').text('Title: '),
+        $('<h1>').text(ad.title),
+        $('<label>').text('Description: '),
+        $('<p>').text(ad.description),
+        $('<label>').text('Publisher: '),
+        $('<div>').text(ad.publisher),
+        $('<label>').text('Date: '),
+        $('<div>').text(ad.datePublished));
+
+    $('#viewDetailsAd').empty().append(adInfo);
+    showView('#viewDetailsAd');
 }
 
-function showBookToEdit(e) {
-    showView('#viewEditAd');
+function showAdToEdit(e) {
     let ad = e.data.ad;
     let parent = $('#formEditAd');
     parent.find('input[name="id"]').val(ad._id);
@@ -59,4 +72,6 @@ function showBookToEdit(e) {
     parent.find('textarea[name="description"]').val(ad.description);
     parent.find('input[name="datePublished"]').val(ad.datePublished);
     parent.find('input[name="price"]').val(ad.price);
+    parent.find('input[name="image"]').val(ad.image);
+    showView('#viewEditAd');
 }

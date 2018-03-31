@@ -7,12 +7,18 @@ let webApi = (function () {
         default: {Authorization: 'Basic ' + BASE_64},
         user: {Authorization: `Kinvey ${sessionStorage.getItem('authToken')}`}
     };
+    const ACTIONS = {
+        register: BASE_URL + 'user/' + APP_ID + '/',
+        login: BASE_URL + 'user/' + APP_ID + '/login',
+        logout: BASE_URL + 'user/' + APP_ID + '/_logout',
+        accessCollection: BASE_URL + 'appdata/' + APP_ID + '/prodavachnik'
+    };
     
     function registerUser() {
         let username = $('#formRegister').find('input[name=username]').val();
         let password = $('#formRegister').find('input[name=passwd]').val();
 
-        sendRequest('POST', `user/${APP_ID}/`,authHeaders.default, {username, password})
+        sendRequest('POST', ACTIONS.register, authHeaders.default, {username, password})
             .then((res) => signInUser(res, 'Registration successful.'))
             .catch(handleAjaxError)
     }
@@ -21,13 +27,13 @@ let webApi = (function () {
         let username = $('#formLogin').find('input[name=username]').val();
         let password = $('#formLogin').find('input[name=passwd]').val();
 
-        sendRequest('POST', `user/${APP_ID}/login`, authHeaders.default, {username, password})
+        sendRequest('POST', ACTIONS.login, authHeaders.default, {username, password})
             .then((res) => signInUser(res, 'LogIn successful.'))
             .catch(handleAjaxError);
     }
     
     function logOutUser() {
-        sendRequest('POST', `user/${APP_ID}/_logout`, authHeaders.user)
+        sendRequest('POST', ACTIONS.logout, authHeaders.user)
             .then(() => signOutUser('logOut successful.'))
             .catch(handleAjaxError);
     }
@@ -50,10 +56,10 @@ let webApi = (function () {
         showInfo(message);
     }
     
-    function sendRequest(method, target, headers, data) {
+    function sendRequest(method, url, headers, data) {
         return $.ajax({
             method,
-            url: BASE_URL + target,
+            url,
             headers,
             data
         });
@@ -68,5 +74,5 @@ let webApi = (function () {
         showError(errorMsg);
     }
 
-    return {registerUser, loginUser, logOutUser, sendRequest, handleAjaxError, BASE_URL, APP_ID, authHeaders}
+    return {registerUser, loginUser, logOutUser, sendRequest, handleAjaxError, authHeaders, ACTIONS}
 })();
