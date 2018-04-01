@@ -40,13 +40,11 @@ function showHomeView() {
 
 function showFormView(e) {
     let formName = $(e.target).attr('id').slice(4);
-    console.log(formName);
     $('#form'+ formName).trigger('reset');
     showView('#view' + formName);
 }
 
-function showAdDetails(e) {
-    let ad = e.data.ad;
+function showAdDetails(ad) {
     let adInfo = $('<div>').append(
         $('<img src="" height="200" width="300">').attr('src', ad.image),
         $('<br>'),
@@ -57,7 +55,9 @@ function showAdDetails(e) {
         $('<label>').text('Publisher: '),
         $('<div>').text(ad.publisher),
         $('<label>').text('Date: '),
-        $('<div>').text(ad.datePublished));
+        $('<div>').text(ad.datePublished),
+        $('<label>').text('Views: '),
+        $('<div>').text(ad.viewCount));
 
     $('#viewDetailsAd').empty().append(adInfo);
     showView('#viewDetailsAd');

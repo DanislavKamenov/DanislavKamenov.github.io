@@ -27,7 +27,7 @@ function displayAds(ads) {
         row.append($('<td></td>').text(ad.datePublished));
         row.append(btnTd);
 
-        btnTd.append($(`<a href="#">[Read More]</a>`).on('click', {ad}, showAdDetails));
+        btnTd.append($(`<a href="#">[Read More]</a>`).on('click', incrementViews));
 
         if (ad._acl.creator === sessionStorage.getItem('userId')) {
             row.append(
@@ -43,8 +43,9 @@ function displayAds(ads) {
 function listAds() {
     return webApi.sendRequest('GET', webApi.ACTIONS.accessCollection, webApi.authHeaders.user)
         .then((res) => {
+            console.log(res);
             showView('#viewAds');
-            displayAds(res.reverse());
+            displayAds(res.sort((a, b) => b.viewCount - a.viewCount));
         })
         .catch(webApi.handleAjaxError);
 
@@ -74,4 +75,10 @@ function editAd() {
     webApi.sendRequest('PUT', webApi.ACTIONS.accessCollection + '/' + id, webApi.authHeaders.user, dataObj)
         .then(() => listAds().then(() => showInfo('Edit Successful.')))
         .catch(webApi.handleAjaxError);
+}
+
+function incrementViews(e) {
+    let id = $(e.target).parent().parent().attr('id');
+    webApi.sendRequest('GET', webApi.ACTIONS.accessCollection + '/' + id, webApi.authHeaders.user)
+        .then(showAdDetails);
 }

@@ -13,10 +13,9 @@ function attachEvents() {
     $('#buttonCreateAd').on('click', createAd);
     $('#buttonEditAd').on('click', editAd);
 
-
-    // $("#infoBox, #errorBox").on('click', function() {
-    //     $(this).fadeOut()
-    // })
+    $("#infoBox, #errorBox").on('click', function() {
+        $(this).fadeOut()
+    });
 
     $(document).on({
         ajaxStart: () => $('#loadingBox').show(),
