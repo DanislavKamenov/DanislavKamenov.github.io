@@ -1,5 +1,4 @@
 function showMenuLinks() {
-    $('#viewHome').show();
     $('#linkHome').show();
     if (sessionStorage.getItem("authToken") === null) {
         $('#linkLogin').show();
@@ -44,6 +43,33 @@ function showFormView(e) {
     showView('#view' + formName);
 }
 
+function displayAds(ads) {
+    let table = $('table');
+    table.find('tr').each((idx, el) => {if(idx > 0) $(el).remove()});
+    ads.forEach(ad => {
+        let row = $(`<tr id="${ad._id}">`);
+        let btnTd = $('<td id="buttons">');
+        table.append(row);
+        row.append($('<td></td>').text(ad.title));
+        row.append($('<td></td>').text(ad.publisher));
+        row.append($('<td></td>').text(ad.description));
+        row.append($('<td></td>').text(ad.price));
+        row.append($('<td></td>').text(ad.datePublished));
+        row.append(btnTd);
+
+        btnTd.append($(`<a href="#">[Read More]</a>`).on('click', incrementViews));
+
+        if (ad._acl.creator === sessionStorage.getItem('userId')) {
+            row.append(
+                btnTd.append(
+                    $(`<a href="#">[Delete]</a>`).on('click', deleteAd),
+                    $(`<a href="#">[Edit]</a>`).on('click', {ad}, showAdToEdit)
+                ));
+        }
+
+    });
+}
+
 function showAdDetails(ad) {
     let adInfo = $('<div>').append(
         $('<img src="" height="200" width="300">').attr('src', ad.image),
@@ -67,7 +93,6 @@ function showAdToEdit(e) {
     let ad = e.data.ad;
     let parent = $('#formEditAd');
     parent.find('input[name="id"]').val(ad._id);
-    parent.find('input[name="publisher"]').val(ad.publisher);
     parent.find('input[name="title"]').val(ad.title);
     parent.find('textarea[name="description"]').val(ad.description);
     parent.find('input[name="datePublished"]').val(ad.datePublished);

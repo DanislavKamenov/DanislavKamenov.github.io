@@ -74,5 +74,5 @@ let webApi = (function () {
         showError(errorMsg);
     }
 
-    return {registerUser, loginUser, logOutUser, sendRequest, handleAjaxError, authHeaders, ACTIONS}
+    return {registerUser, loginUser, logOutUser, sendRequest, handleAjaxError, authHeaders, ACTIONS};
 })();
