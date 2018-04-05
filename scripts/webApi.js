@@ -14,48 +14,6 @@ let webApi = (function () {
         accessCollection: BASE_URL + 'appdata/' + APP_ID + '/prodavachnik'
     };
     
-    function registerUser() {
-        let username = $('#formRegister').find('input[name=username]').val();
-        let password = $('#formRegister').find('input[name=passwd]').val();
-
-        sendRequest('POST', ACTIONS.register, authHeaders.default, {username, password})
-            .then((res) => signInUser(res, 'Registration successful.'))
-            .catch(handleAjaxError)
-    }
-    
-    function loginUser() {
-        let username = $('#formLogin').find('input[name=username]').val();
-        let password = $('#formLogin').find('input[name=passwd]').val();
-
-        sendRequest('POST', ACTIONS.login, authHeaders.default, {username, password})
-            .then((res) => signInUser(res, 'LogIn successful.'))
-            .catch(handleAjaxError);
-    }
-    
-    function logOutUser() {
-        sendRequest('POST', ACTIONS.logout, authHeaders.user)
-            .then(() => signOutUser('logOut successful.'))
-            .catch(handleAjaxError);
-    }
-
-    function signInUser(res, message) {
-        sessionStorage.setItem('username', res.username);
-        sessionStorage.setItem('authToken', res._kmd.authtoken);
-        sessionStorage.setItem('userId', res._id);
-        authHeaders.user = {Authorization: `Kinvey ${sessionStorage.getItem('authToken')}`};
-
-        showMenuLinks();
-        showHomeView();
-        showInfo(message);
-    }
-
-    function signOutUser (message) {
-        sessionStorage.clear();
-        showMenuLinks();
-        showHomeView();
-        showInfo(message);
-    }
-    
     function sendRequest(method, url, headers, data) {
         return $.ajax({
             method,
@@ -74,5 +32,5 @@ let webApi = (function () {
         showError(errorMsg);
     }
 
-    return {registerUser, loginUser, logOutUser, sendRequest, handleAjaxError, authHeaders, ACTIONS};
+    return {sendRequest, handleAjaxError, authHeaders, ACTIONS};
 })();

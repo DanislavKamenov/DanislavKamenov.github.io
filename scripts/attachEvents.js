@@ -1,25 +1,45 @@
-function attachEvents() {
-    //bind menu buttons.
-    $('#linkHome').on('click', showHomeView);
-    $('#linkLogin').on('click', showFormView);
-    $('#linkRegister').on('click', showFormView);
-    $('#linkLogout').on('click', webApi.logOutUser);
-    $('#linkCreateAd').on('click', showFormView);
-    $('#linkListAds').on('click', listAds);
-
-    //bind forms.
-    $('#buttonRegisterUser').on('click', webApi.registerUser);
-    $('#buttonLoginUser').on('click', webApi.loginUser);
-    $('#buttonCreateAd').on('click', createAd);
-    $('#buttonEditAd').on('click', editAd);
-
-    //bind error boxes.
-    $("#infoBox, #errorBox").on('click', function() {
-        $(this).fadeOut()
-    });
-
+let eventBinder = (function () {
     $(document).on({
         ajaxStart: () => $('#loadingBox').show(),
         ajaxStop: () => $('#loadingBox').hide()
     });
-}
+
+    function links() {
+        $('#linkHome').on('click', loadHomeTemplate);
+        $('#linkLogin').on('click', loadFormTemplate);
+        $('#linkRegister').on('click', loadFormTemplate);
+        $('#linkLogout').on('click', auth.logOutUser);
+        $('#linkCreateAd').on('click', loadFormTemplate);
+        $('#linkListAds').on('click', listAds);
+
+        $("#infoBox, #errorBox").on('click', function() {
+            $(this).fadeOut()
+        });
+    }
+
+   function formAuth() {
+       $('#buttonRegisterUser').on('click', auth.registerUser);
+       $('#buttonLoginUser').on('click', auth.loginUser);
+   }
+
+   function formSend() {
+       $('#buttonCreateAd').on('click', createAd);
+       $('#buttonEditAd').on('click', editAd);
+   }
+
+   function create() {
+       $('#buttonCreateAd').on('click', createAd);
+   }
+
+   function edit() {
+       $('#buttonEditAd').on('click', editAd);
+   }
+
+   function actions() {
+       $('.readMore').on('click', incrementViews);
+       $('.edit').on('click', loadEditTemplate);
+       $('.delete').on('click', deleteAd);
+   }
+
+   return {links, formAuth, formSend, create, edit, actions};
+})();

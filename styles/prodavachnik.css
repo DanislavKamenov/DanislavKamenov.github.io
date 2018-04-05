@@ -18,13 +18,11 @@ body{
 }
 
 #menu a {
-    display: none;
     text-decoration: none;
     padding: 5px 20px;
 }
 
 .menu-item {
-    display: none;
     text-decoration: none;
     padding: 5px 20px;
     color: #fff;
@@ -42,7 +40,6 @@ body{
 
 
 main > section {
-    display: none;
     padding: 20px 5px;
 }
 
@@ -118,12 +115,15 @@ input[type=button]:hover{
 }
 
 #loadingBox {
+    display: none;
     background: #7CB3E9;
 }
 #infoBox {
+    display: none;
     background: #393;
 }
 #errorBox {
+    display: none;
     background: #F50;
 }
 
