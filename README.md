@@ -1,2 +1,2 @@
 # danislavkamenov.github.io
-Git Page for my first single page app.
+Git Page for my first Single Page App.
