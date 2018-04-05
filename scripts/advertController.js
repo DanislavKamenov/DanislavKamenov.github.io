@@ -54,7 +54,7 @@ function editAd() {
     let title = parent.find('input[name="title"]').val();
     let description = parent.find('textarea[name="description"]').val();
     let datePublished = parent.find('input[name="datePublished"]').val();
-    let price = parent.find('input[name="price"]').val().toFixed(2);
+    let price = Number(parent.find('input[name="price"]').val()).toFixed(2);
     let image = parent.find('input[name="image"]').val();
     let dataObj = {title, description, datePublished, price, image};
 
